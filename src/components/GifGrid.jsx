@@ -1,33 +1,37 @@
+import PropTypes from 'prop-types';
+
 import { GifItem } from './GifItem';
 import { useFetchGifs } from '../hooks/useFetchGifs';
 
 export const GifGrid = ({ category }) => {
 
-    const { images, isLoading } = useFetchGifs(category); //customHook
-
+    const { images, isLoading } = useFetchGifs( category );
+    
     return (
         <>
-            {/* El nombre de la busqueda */}
-            <h3>{category}</h3>
-
-            {/* Loader */}
+            <h3>{ category }</h3>
             {
-                isLoading && (<h2>Un momentito...</h2>)
+                isLoading && ( <h2>Cargando...</h2> )
             }
+            
 
-            {/* Imagenes */}
             <div className="card-grid">
                 {
-                    images.map((image) => (
-                        <GifItem
-                            key={image.id}
-                            {...image}// se envia todas las propiedades del image
+                    images.map( ( image ) => (
+                        <GifItem 
+                            key={ image.id } 
+                            { ...image }
                         />
                     ))
                 }
-
+                
             </div>
 
         </>
     )
+}
+
+
+GifGrid.propTypes = {
+    category: PropTypes.string.isRequired,
 }

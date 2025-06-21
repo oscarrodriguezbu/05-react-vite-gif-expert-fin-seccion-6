@@ -1,32 +1,37 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
+export const AddCategory = ({ onNewCategory }) => {
 
-export const AddCategory = ({ onNewCategory }) => { //onNewCategory es una funcion que viene del componente padre y espera recibir un value
-
-    const [inputValue, setInputValue] = useState(''); //para que el input inicialice sin nada
+    const [ inputValue, setInputValue ] = useState('');
 
     const onInputChange = ({ target }) => {
-        setInputValue(target.value); //es el nuevo valor que se ingresa en el input
+        setInputValue( target.value );
     }
 
-    const onSubmit = (event) => {
-        event.preventDefault(); //evita un refresh del navegador
-        if (inputValue.trim().length <= 1) return; //para que se ejecute si hay algo de texto almenos 
+    const onSubmit = ( event ) => {
+        event.preventDefault();
+        if( inputValue.trim().length <= 1) return;
 
-        // setCategories( categories => [ inputValue, ...categories ]); //Esto se ejecuta en el padre
-        setInputValue(''); // limpiar campos
-        onNewCategory(inputValue.trim());//envia el valor al padre para que el padre lo procese en un callback y haga los cambios respectivos
+        // setCategories( categories => [ inputValue, ...categories ]);
+        setInputValue('');
+        onNewCategory( inputValue.trim() );
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            {/* onSubmit es para disparar el evento al oprimir enter */}
-            <input
+        <form onSubmit={ onSubmit } aria-label="form">
+            <input 
                 type="text"
                 placeholder="Buscar gifs"
-                value={inputValue}
-                onChange={onInputChange} //obligatorio para asegurse de que cambie el value del input
+                value={ inputValue }
+                onChange={ onInputChange }
             />
         </form>
     )
+}
+
+
+
+AddCategory.propTypes = {
+    onNewCategory: PropTypes.func.isRequired,
 }

@@ -14,7 +14,7 @@ export const useFetchGifs = ( category ) => {
     
     useEffect( () => {
         getImages();
-    }, []); //si se coloca [] quiere decir que solo se va a ejecutar una sola vez cuando se renderice el componente
+    }, []);
 
 
 
